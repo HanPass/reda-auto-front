@@ -1,0 +1,6 @@
+.layout { height: 100vh; }
+mat-sidenav { width: 240px; padding: 1rem; }
+.spacer { flex: 1 1 auto; }
+@media (max-width: 1024px) {
+  mat-sidenav { width: 180px; }
+}

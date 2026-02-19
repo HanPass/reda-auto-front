@@ -1,0 +1,11 @@
+<mat-card>
+  <button mat-raised-button color="primary" (click)="open()">Nouveau client</button>
+  <table mat-table [dataSource]="(clients$ | async) || []">
+    <ng-container matColumnDef="nom"><th mat-header-cell *matHeaderCellDef>Nom</th><td mat-cell *matCellDef="let row">{{ row.nom }}</td></ng-container>
+    <ng-container matColumnDef="telephone"><th mat-header-cell *matHeaderCellDef>Téléphone</th><td mat-cell *matCellDef="let row">{{ row.telephone }}</td></ng-container>
+    <ng-container matColumnDef="credit"><th mat-header-cell *matHeaderCellDef>Crédit</th><td mat-cell *matCellDef="let row">{{ row.creditActuel }} MAD <span *ngIf="row.creditActuel > row.plafond" class="alert-badge">Plafond dépassé</span></td></ng-container>
+    <ng-container matColumnDef="actions"><th mat-header-cell *matHeaderCellDef></th><td mat-cell *matCellDef="let row"><button mat-button (click)="open(row)">Edit</button><button mat-button color="warn" (click)="remove(row.id)">Suppr.</button></td></ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</mat-card>

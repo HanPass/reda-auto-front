@@ -1,0 +1,23 @@
+<ng-container *ngIf="!isAuthRoute; else authLayout">
+  <mat-sidenav-container class="layout">
+    <mat-sidenav mode="side" opened>
+      <h3>Reda Auto</h3>
+      <mat-divider></mat-divider>
+      <mat-nav-list>
+        <a mat-list-item *ngFor="let item of menu" [routerLink]="item.path">{{ item.label }}</a>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <mat-toolbar color="primary">
+        <span>Gestion stock pièces automobiles</span>
+        <span class="spacer"></span>
+        <mat-slide-toggle (change)="toggleTheme($event.checked)">Sombre</mat-slide-toggle>
+        <button mat-icon-button (click)="logout()"><mat-icon>logout</mat-icon></button>
+      </mat-toolbar>
+      <div class="container"><router-outlet></router-outlet></div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</ng-container>
+<ng-template #authLayout>
+  <router-outlet></router-outlet>
+</ng-template>

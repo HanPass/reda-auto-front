@@ -1,0 +1,17 @@
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
+body.dark-theme {
+  background: #121212;
+  color: #f4f4f4;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, Arial, sans-serif;
+  background: #f7f8fb;
+}
+
+.container { padding: 1rem; }
+.table-wrap { overflow: auto; }
+.alert-badge { background: #c62828; color: white; padding: 0.1rem 0.5rem; border-radius: 999px; font-size: 0.75rem; }
+.cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 1rem; }
