@@ -9,7 +9,7 @@ export class ClientsComponent {
   private service = inject(ClientsService);
   private dialog = inject(MatDialog);
 
-  displayedColumns = ['nom', 'telephone', 'credit', 'actions'];
+  displayedColumns = ['nom', 'telephone', 'ville', 'vehicules', 'credit', 'actions'];
   clients$ = this.service.clients$;
 
   open(client?: Client): void {

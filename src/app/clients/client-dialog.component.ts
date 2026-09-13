@@ -8,8 +8,11 @@ import { Client } from '../core/models/types';
     <h2 mat-dialog-title>Client</h2>
     <mat-dialog-content>
       <form [formGroup]="form" class="grid">
-        <mat-form-field><mat-label>Nom</mat-label><input matInput formControlName="nom"></mat-form-field>
+        <mat-form-field><mat-label>Nom / raison sociale</mat-label><input matInput formControlName="nom"></mat-form-field>
+        <mat-form-field><mat-label>Type</mat-label><mat-select formControlName="type"><mat-option *ngFor="let t of types" [value]="t">{{t}}</mat-option></mat-select></mat-form-field>
         <mat-form-field><mat-label>Téléphone</mat-label><input matInput formControlName="telephone"></mat-form-field>
+        <mat-form-field><mat-label>E-mail</mat-label><input type="email" matInput formControlName="email"></mat-form-field>
+        <mat-form-field><mat-label>Ville</mat-label><input matInput formControlName="ville"></mat-form-field>
         <mat-form-field><mat-label>Crédit</mat-label><input type="number" matInput formControlName="creditActuel"></mat-form-field>
         <mat-form-field><mat-label>Plafond</mat-label><input type="number" matInput formControlName="plafond"></mat-form-field>
       </form>
@@ -20,11 +23,12 @@ import { Client } from '../core/models/types';
 })
 export class ClientDialogComponent {
   private fb = inject(FormBuilder);
-  form = this.fb.group({ id: [0], nom: ['', Validators.required], telephone: ['', Validators.required], creditActuel: [0], plafond: [0] });
+  types: Client['type'][]=['Particulier','Garage','Mécanicien','Entreprise','Revendeur'];
+  form = this.fb.group({ id: [0], nom: ['', Validators.required], type: ['Particulier' as Client['type'],Validators.required], telephone: ['', Validators.required], email:[''],ville:[''], creditActuel: [0], plafond: [0] });
 
-  constructor(private dialogRef: MatDialogRef<ClientDialogComponent>, @Inject(MAT_DIALOG_DATA) data: Client | null) {
+  constructor(private dialogRef: MatDialogRef<ClientDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: Client | null) {
     if (data) this.form.patchValue(data);
   }
 
-  save(): void { if (this.form.valid) this.dialogRef.close(this.form.getRawValue() as Client); }
+  save(): void { if (this.form.valid) this.dialogRef.close({...this.form.getRawValue(),vehicules:this.data?.vehicules||[]} as Client); }
 }

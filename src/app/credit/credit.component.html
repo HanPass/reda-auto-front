@@ -1,18 +1,18 @@
-<div class="cards-grid">
-  <mat-card>
+<header class="page-header"><div><h1>Crédits clients</h1><p>Suivez les créances et enregistrez les règlements</p></div></header><div class="cards-grid">
+  <mat-card class="panel" style="padding:20px">
     <h3>Clients débiteurs</h3>
-    <ul><li *ngFor="let c of debiteurs$ | async">{{ c.nom }} - {{ c.creditActuel }} MAD</li></ul>
+    <div *ngFor="let c of debiteurs$ | async" style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid #e2e8f0"><div><strong>{{c.nom}}</strong><small class="muted" style="display:block">Plafond {{country.formatPrice(c.plafond)}}</small></div><strong [class.negative]="c.creditActuel>c.plafond">{{country.formatPrice(c.creditActuel)}}</strong></div>
   </mat-card>
-  <mat-card>
+  <mat-card class="panel" style="padding:20px">
     <h3>Remboursement</h3>
     <form [formGroup]="form" (ngSubmit)="rembourser()">
-      <mat-form-field><mat-label>Client</mat-label><input matInput formControlName="client"></mat-form-field>
+      <mat-form-field style="width:100%"><mat-label>Client</mat-label><mat-select formControlName="clientId"><mat-option *ngFor="let c of debiteurs$|async" [value]="c.id">{{c.nom}} — {{country.formatPrice(c.creditActuel)}}</mat-option></mat-select></mat-form-field>
       <mat-form-field><mat-label>Montant</mat-label><input matInput type="number" formControlName="montant"></mat-form-field>
       <button mat-raised-button color="primary">Enregistrer</button>
     </form>
   </mat-card>
 </div>
-<mat-card style="margin-top:1rem;">
+<mat-card class="panel" style="margin-top:1rem;padding:20px">
   <h3>Historique transactions</h3>
-  <ul><li *ngFor="let h of historique$ | async">{{ h.date | date:'short' }} - {{ h.client }}: {{ h.montant }} MAD</li></ul>
+  <ul><li *ngFor="let h of historique$ | async">{{ h.date | date:'short' }} - {{ h.client }}: {{country.formatPrice(h.montant)}}</li></ul>
 </mat-card>

@@ -1,11 +1,13 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { CaisseService } from './caisse.service';
+import { CountryService } from '../core/services/country.service';
 
 @Component({ templateUrl: './caisse.component.html' })
 export class CaisseComponent {
   private fb = inject(FormBuilder);
   private service = inject(CaisseService);
+  country = inject(CountryService);
 
   openForm = this.fb.group({ initial: [0, Validators.required] });
   depenseForm = this.fb.group({ montant: [0, Validators.required] });

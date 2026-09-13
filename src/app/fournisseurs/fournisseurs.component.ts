@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { DemoStoreService } from '../core/services/demo-store.service';
 
 @Component({
-  template: `<mat-card><h3>Fournisseurs</h3><p>Module prêt pour gestion CRUD fournisseurs.</p></mat-card>`
+  template: `<header class="page-header"><div><h1>Fournisseurs</h1><p>Catalogue, conditions commerciales et délais d'approvisionnement</p></div><button mat-raised-button color="primary"><mat-icon>add_business</mat-icon> Nouveau fournisseur</button></header><div class="supplier-grid"><mat-card class="panel supplier" *ngFor="let s of store.suppliers$|async"><div class="supplier-head"><span>{{s.nom.slice(0,2).toUpperCase()}}</span><div><h3>{{s.nom}}</h3><small>{{s.ville}}</small></div><button mat-icon-button><mat-icon>more_vert</mat-icon></button></div><mat-divider></mat-divider><dl><div><dt>Contact</dt><dd>{{s.telephone}}<br>{{s.email}}</dd></div><div><dt>Délai moyen</dt><dd>{{s.delaiMoyen}} jours</dd></div><div><dt>Paiement</dt><dd>{{s.conditionsPaiement}}</dd></div></dl><mat-chip-set><mat-chip *ngFor="let marque of s.marques">{{marque}}</mat-chip></mat-chip-set></mat-card></div>`,
+  styles: ['.supplier-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:14px}.supplier{padding:18px}.supplier-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}.supplier-head>span{width:44px;height:44px;border-radius:10px;background:#172033;color:#fff;display:grid;place-items:center;font-weight:bold}.supplier-head div{flex:1}.supplier h3{margin:0}.supplier small{color:#64748b}dl{display:grid;grid-template-columns:2fr 1fr 1fr;gap:10px}dt{font-size:11px;color:#64748b}dd{margin:4px 0;font-size:13px}@media(max-width:500px){dl{grid-template-columns:1fr 1fr}}']
 })
-export class FournisseursComponent {}
+export class FournisseursComponent { store=inject(DemoStoreService); }

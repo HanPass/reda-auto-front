@@ -1,6 +1,6 @@
 # Reda Auto Front
 
-Frontend Angular 17+ pour une application locale de gestion de stock de pièces automobiles.
+Prototype frontend Angular 17 de gestion d'un magasin de pièces détachées automobiles. Cette phase fonctionne sans backend : les données de démonstration sont centralisées dans un store local et persistées dans `localStorage`.
 
 ## Stack
 - Angular 17+
@@ -10,17 +10,19 @@ Frontend Angular 17+ pour une application locale de gestion de stock de pièces 
 - SCSS
 - Architecture modulaire par domaine
 
-## Modules
-- `core` (guards, interceptors JWT + erreurs globales, modèles, notifications)
-- `shared` (module Angular Material)
-- `auth` (login + gestion JWT localStorage)
-- `dashboard`
-- `produits`
-- `fournisseurs`
-- `clients`
-- `ventes`
-- `credit`
-- `caisse`
+## Parcours disponibles
+
+- Tableau de bord et indicateurs métier
+- Catalogue de 40 pièces avec références OEM, équipementiers et compatibilités véhicule
+- Fiche détaillée et formulaire d'une pièce
+- Vente comptoir avec panier, remise, taxes, paiement et contrôle du stock
+- Historique des ventes et retour total avec remise en stock
+- Stock physique, réservé et disponible, mouvements et corrections tracées
+- Commandes fournisseurs et réception avec mise à jour du stock
+- Clients, fournisseurs, crédits et caisse
+- Rapports et paramètres
+- Mode Maroc (MAD) / France (EUR)
+- Interface responsive ordinateur, tablette et mobile
 
 ## Lancement
 ```bash
@@ -30,21 +32,15 @@ npm start
 
 Application disponible sur `http://localhost:4200`.
 
-## Comptes de test (login)
+## Comptes de démonstration
 - `admin` → rôle `ADMIN`
 - `caisse` → rôle `CAISSIER`
-- autre username → rôle `VENDEUR`
+- autre identifiant → rôle `VENDEUR`
 
-## Fonctionnalités incluses
-- Authentification locale avec token JWT simulé (`localStorage`)
-- Interceptor JWT pour ajouter `Authorization: Bearer ...`
-- Interceptor global d'erreur avec snackbar
-- AuthGuard + RoleGuard
-- Produits: liste paginée, recherche dynamique, badge alerte stock, CRUD via dialog
-- Clients: CRUD + badge plafond crédit dépassé
-- Ventes: interface POS simple, total auto, mode paiement, client obligatoire pour crédit
-- Crédit: débiteurs, remboursement, historique
-- Caisse: ouvrir, solde live, dépense, fermer, calcul écart
-- Dashboard: cartes KPI + zone graphique
-- Mode sombre activable
-- UI responsive tablette
+N'importe quel mot de passe non vide est accepté dans ce prototype.
+
+## Données locales
+
+Les créations, ventes, réceptions et corrections sont conservées dans le navigateur. Le bouton **Réinitialiser les données** dans Paramètres restaure le jeu initial.
+
+Ces données et les paramètres fiscaux sont uniquement destinés à valider l'interface. Ils ne constituent pas des documents comptables ou fiscaux réels.

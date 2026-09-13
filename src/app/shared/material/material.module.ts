@@ -15,6 +15,13 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 const modules = [
   MatToolbarModule,
@@ -32,7 +39,14 @@ const modules = [
   MatSelectModule,
   MatBadgeModule,
   MatSlideToggleModule,
-  MatDividerModule
+  MatDividerModule,
+  MatMenuModule,
+  MatTooltipModule,
+  MatChipsModule,
+  MatTabsModule,
+  MatExpansionModule,
+  MatProgressBarModule,
+  MatCheckboxModule
 ];
 
 @NgModule({

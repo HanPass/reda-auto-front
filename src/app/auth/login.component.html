@@ -1,6 +1,8 @@
 <div class="login-wrapper">
-  <mat-card>
-    <h2>Connexion</h2>
+  <div class="login-visual"><div class="visual-content"><span class="brand-mark">RA</span><h1>Gérez votre magasin<br>avec précision.</h1><p>Stock, compatibilités, achats et ventes réunis dans un outil conçu pour les professionnels de la pièce automobile.</p><div class="features"><span><mat-icon>inventory_2</mat-icon> Stock en temps réel</span><span><mat-icon>directions_car</mat-icon> Compatibilités véhicule</span><span><mat-icon>point_of_sale</mat-icon> Vente comptoir rapide</span></div></div></div>
+  <mat-card class="login-card">
+    <div class="mobile-brand"><span class="brand-mark">RA</span><strong>Reda Auto</strong></div>
+    <h2>Bienvenue</h2><p class="subtitle">Connectez-vous à votre espace de gestion</p>
     <form [formGroup]="form" (ngSubmit)="submit()">
       <mat-form-field appearance="outline" class="full">
         <mat-label>Utilisateur</mat-label>
@@ -10,7 +12,8 @@
         <mat-label>Mot de passe</mat-label>
         <input matInput type="password" formControlName="password">
       </mat-form-field>
-      <button mat-raised-button color="primary" class="full">Se connecter</button>
+      <button mat-raised-button color="primary" class="full login-button">Se connecter <mat-icon>arrow_forward</mat-icon></button>
     </form>
+    <div class="demo-box"><strong>Accès démonstration</strong><span><code>admin</code> · accès complet</span><span><code>caisse</code> · caisse et ventes</span><span><code>magasinier</code> · stock et achats</span><small>N’importe quel mot de passe est accepté.</small></div>
   </mat-card>
 </div>

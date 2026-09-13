@@ -35,6 +35,10 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     loadChildren: () => import('./ventes/ventes.module').then((m) => m.VentesModule)
   },
+  { path: 'stock', canActivate: [AuthGuard, RoleGuard], data: { roles: ['ADMIN', 'MAGASINIER'] }, loadChildren: () => import('./stock/stock.module').then(m => m.StockModule) },
+  { path: 'achats', canActivate: [AuthGuard, RoleGuard], data: { roles: ['ADMIN', 'MAGASINIER'] }, loadChildren: () => import('./achats/achats.module').then(m => m.AchatsModule) },
+  { path: 'rapports', canActivate: [AuthGuard, RoleGuard], data: { roles: ['ADMIN', 'GERANT'] }, loadChildren: () => import('./rapports/rapports.module').then(m => m.RapportsModule) },
+  { path: 'parametres', canActivate: [AuthGuard, RoleGuard], data: { roles: ['ADMIN'] }, loadChildren: () => import('./parametres/parametres.module').then(m => m.ParametresModule) },
   {
     path: 'credit',
     canActivate: [AuthGuard],

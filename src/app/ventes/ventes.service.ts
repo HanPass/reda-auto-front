@@ -1,13 +1,10 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { VenteItem } from '../core/models/types';
+import { Injectable, inject } from '@angular/core';
+import { Vente } from '../core/models/types';
+import { DemoStoreService } from '../core/services/demo-store.service';
 
 @Injectable({ providedIn: 'root' })
 export class VentesService {
-  private salesSubject = new BehaviorSubject<{ items: VenteItem[]; total: number; mode: string; clientId?: number }[]>([]);
-  ventes$ = this.salesSubject.asObservable();
-
-  addSale(sale: { items: VenteItem[]; total: number; mode: string; clientId?: number }): void {
-    this.salesSubject.next([...this.salesSubject.value, sale]);
-  }
+  private store = inject(DemoStoreService);
+  ventes$ = this.store.sales$;
+  addSale(sale: Vente): void { this.store.createSale(sale); }
 }

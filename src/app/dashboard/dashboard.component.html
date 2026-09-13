@@ -1,10 +1,15 @@
-<div class="cards-grid">
-  <mat-card *ngFor="let card of cards">
-    <h3>{{ card.label }}</h3>
-    <p>{{ card.value }}</p>
-  </mat-card>
-</div>
-<mat-card style="margin-top: 1rem;">
-  <h3>Graphique simple</h3>
-  <p>Zone prévue pour intégrer Chart.js (ventes hebdomadaires).</p>
-</mat-card>
+<header class="page-header"><div><h1>Tableau de bord</h1><p>Vue d’ensemble de l’activité du magasin</p></div><a mat-raised-button color="primary" routerLink="/ventes/comptoir"><mat-icon>add_shopping_cart</mat-icon> Nouvelle vente</a></header>
+<section class="kpi-grid">
+  <mat-card class="kpi panel"><span class="kpi-icon blue"><mat-icon>payments</mat-icon></span><div><small>Chiffre d’affaires</small><strong>{{ country.formatPrice(revenue) }}</strong><em>+12,4 % ce mois</em></div></mat-card>
+  <mat-card class="kpi panel"><span class="kpi-icon green"><mat-icon>trending_up</mat-icon></span><div><small>Marge estimée</small><strong>{{ country.formatPrice(margin) }}</strong><em>{{ revenue ? (margin / revenue * 100 | number:'1.0-1') : 0 }} % du CA</em></div></mat-card>
+  <mat-card class="kpi panel"><span class="kpi-icon violet"><mat-icon>inventory_2</mat-icon></span><div><small>Valeur du stock</small><strong>{{ country.formatPrice(stockValue) }}</strong><em>{{ products.length }} références</em></div></mat-card>
+  <mat-card class="kpi panel"><span class="kpi-icon orange"><mat-icon>warning</mat-icon></span><div><small>À réapprovisionner</small><strong>{{ lowStock.length + outOfStock.length }}</strong><em>{{ outOfStock.length }} ruptures</em></div></mat-card>
+</section>
+<section class="dashboard-grid">
+  <mat-card class="panel chart-panel"><div class="panel-header"><div><h2>Ventes de la semaine</h2><span class="muted">Montants journaliers simulés</span></div><button mat-stroked-button>7 derniers jours</button></div><div class="chart"><div class="bar-wrap" *ngFor="let bar of bars; let i=index"><div class="bar" [style.height.%]="bar"></div><small>{{ days[i] }}</small></div></div></mat-card>
+  <mat-card class="panel alert-panel"><div class="panel-header"><h2>Alertes stock</h2><a mat-button routerLink="/stock">Tout voir</a></div><div class="stock-alert" *ngFor="let product of (outOfStock.concat(lowStock) | slice:0:5)"><span class="part-icon"><mat-icon>settings</mat-icon></span><div><strong>{{ product.nom }}</strong><small>{{ product.reference }} · {{ product.emplacement }}</small></div><span class="status" [class.danger]="product.stock===0" [class.warning]="product.stock>0">{{ product.stock===0 ? 'Rupture' : product.stock + ' dispo.' }}</span></div></mat-card>
+</section>
+<section class="dashboard-grid lower">
+  <mat-card class="panel"><div class="panel-header"><h2>Derniers mouvements</h2><a mat-button routerLink="/stock">Historique</a></div><div class="table-wrap"><table><thead><tr><th>Pièce</th><th>Type</th><th>Qté</th><th>Stock</th></tr></thead><tbody><tr *ngFor="let movement of movements"><td><strong>{{ movement.produitNom }}</strong><small>{{ movement.reference }}</small></td><td>{{ movement.type }}</td><td [class.positive]="movement.quantite>0" [class.negative]="movement.quantite<0">{{ movement.quantite>0 ? '+' : '' }}{{ movement.quantite }}</td><td>{{ movement.stockApres }}</td></tr></tbody></table></div></mat-card>
+  <mat-card class="panel"><div class="panel-header"><h2>Stock à forte valeur</h2><a mat-button routerLink="/produits">Catalogue</a></div><div class="rank" *ngFor="let product of topProducts; let i=index"><span>{{ i+1 }}</span><div><strong>{{ product.nom }}</strong><small>{{ product.marque }} · {{ product.stock }} unités</small></div><b>{{ country.formatPrice(product.stock * product.prixAchat) }}</b></div></mat-card>
+</section>

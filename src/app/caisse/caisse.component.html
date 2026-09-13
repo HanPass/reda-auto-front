@@ -1,6 +1,6 @@
-<mat-card>
-  <h3>Caisse</h3>
-  <p>Solde temps réel: <strong>{{ solde$ | async }} MAD</strong></p>
+<header class="page-header"><div><h1>Caisse</h1><p>Ouverture, dépenses et clôture de la caisse</p></div></header><mat-card class="panel" style="padding:20px">
+  <h3>Session de caisse</h3>
+  <p>Solde temps réel: <strong>{{country.formatPrice((solde$ | async) || 0)}}</strong></p>
   <div class="cards-grid">
     <form [formGroup]="openForm" (ngSubmit)="ouvrir()">
       <mat-form-field><mat-label>Solde initial</mat-label><input matInput type="number" formControlName="initial"></mat-form-field>
@@ -15,5 +15,5 @@
       <button mat-raised-button color="warn">Fermer caisse</button>
     </form>
   </div>
-  <p *ngIf="ecart !== null">Écart: {{ ecart }} MAD</p>
+  <p *ngIf="ecart !== null">Écart: <strong [class.negative]="ecart!==0">{{country.formatPrice(ecart)}}</strong></p>
 </mat-card>
