@@ -32,6 +32,17 @@ npm start
 
 Application disponible sur `http://localhost:4200`.
 
+## Déploiement Cloudflare Workers
+
+Le fichier `wrangler.jsonc` publie le build Angular comme une SPA statique :
+
+```bash
+npm run build
+npx wrangler deploy
+```
+
+Le fallback SPA permet d'ouvrir directement les routes telles que `/produits` ou `/stock` sans erreur 404.
+
 ## Comptes de démonstration
 - `admin` → rôle `ADMIN`
 - `caisse` → rôle `CAISSIER`
